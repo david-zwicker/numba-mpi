@@ -67,9 +67,10 @@ _MpiOp = ctypes.c_int
 
 
 class Operator(IntEnum):
-    Max = MPI.MAX.py2f()
-    Min = MPI.MIN.py2f()
-    Sum = MPI.SUM.py2f()
+    &#34;&#34;&#34;collection of operators that MPI supports&#34;&#34;&#34;
+    MAX = MPI.MAX.py2f()
+    MIN = MPI.MIN.py2f()
+    SUM = MPI.SUM.py2f()
 
 
 _MPI_Initialized = libmpi.MPI_Initialized
@@ -267,14 +268,14 @@ def recv(data, source, tag):
 
 
 @numba.generated_jit(nopython=True)
-def allreduce(data, operator=Operator.Sum):  # pylint: disable=unused-argument
+def allreduce(data, operator=Operator.SUM):  # pylint: disable=unused-argument
     &#34;&#34;&#34;wrapper for MPI_Allreduce
 
     Note that complex datatypes and user-defined functions are not properly supported.
     &#34;&#34;&#34;
     if isinstance(data, (types.Number, Number)):
 
-        def impl(data, operator=Operator.Sum):
+        def impl(data, operator=Operator.SUM):
             sendobj = np.array([data])
             recvobj = np.empty((1,), sendobj.dtype)
 
@@ -296,7 +297,7 @@ def allreduce(data, operator=Operator.Sum):  # pylint: disable=unused-argument
 
     elif isinstance(data, (types.Array, np.ndarray)):
 
-        def impl(data, operator=Operator.Sum):
+        def impl(data, operator=Operator.SUM):
             sendobj = np.ascontiguousarray(data)
             recvobj = np.empty(sendobj.shape, sendobj.dtype)
 
@@ -326,7 +327,7 @@ def allreduce(data, operator=Operator.Sum):  # pylint: disable=unused-argument
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="numba_mpi.mpi.allreduce"><code class="name flex">
-<span>def <span class="ident">allreduce</span></span>(<span>data, operator=Operator.Sum)</span>
+<span>def <span class="ident">allreduce</span></span>(<span>data, operator=Operator.SUM)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>wrapper for MPI_Allreduce</p>
@@ -336,14 +337,14 @@ def allreduce(data, operator=Operator.Sum):  # pylint: disable=unused-argument
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@numba.generated_jit(nopython=True)
-def allreduce(data, operator=Operator.Sum):  # pylint: disable=unused-argument
+def allreduce(data, operator=Operator.SUM):  # pylint: disable=unused-argument
     &#34;&#34;&#34;wrapper for MPI_Allreduce
 
     Note that complex datatypes and user-defined functions are not properly supported.
     &#34;&#34;&#34;
     if isinstance(data, (types.Number, Number)):
 
-        def impl(data, operator=Operator.Sum):
+        def impl(data, operator=Operator.SUM):
             sendobj = np.array([data])
             recvobj = np.empty((1,), sendobj.dtype)
 
@@ -365,7 +366,7 @@ def allreduce(data, operator=Operator.Sum):  # pylint: disable=unused-argument
 
     elif isinstance(data, (types.Array, np.ndarray)):
 
-        def impl(data, operator=Operator.Sum):
+        def impl(data, operator=Operator.SUM):
             sendobj = np.ascontiguousarray(data)
             recvobj = np.empty(sendobj.shape, sendobj.dtype)
 
@@ -513,15 +514,16 @@ def size():
 <span>(</span><span>value, names=None, *, module=None, qualname=None, type=None, start=1)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>An enumeration.</p></div>
+<div class="desc"><p>collection of operators that MPI supports</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class Operator(IntEnum):
-    Max = MPI.MAX.py2f()
-    Min = MPI.MIN.py2f()
-    Sum = MPI.SUM.py2f()</code></pre>
+    &#34;&#34;&#34;collection of operators that MPI supports&#34;&#34;&#34;
+    MAX = MPI.MAX.py2f()
+    MIN = MPI.MIN.py2f()
+    SUM = MPI.SUM.py2f()</code></pre>
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
@@ -531,15 +533,15 @@ def size():
 </ul>
 <h3>Class variables</h3>
 <dl>
-<dt id="numba_mpi.mpi.Operator.Max"><code class="name">var <span class="ident">Max</span></code></dt>
+<dt id="numba_mpi.mpi.Operator.MAX"><code class="name">var <span class="ident">MAX</span></code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt id="numba_mpi.mpi.Operator.Min"><code class="name">var <span class="ident">Min</span></code></dt>
+<dt id="numba_mpi.mpi.Operator.MIN"><code class="name">var <span class="ident">MIN</span></code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt id="numba_mpi.mpi.Operator.Sum"><code class="name">var <span class="ident">Sum</span></code></dt>
+<dt id="numba_mpi.mpi.Operator.SUM"><code class="name">var <span class="ident">SUM</span></code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
@@ -574,9 +576,9 @@ def size():
 <li>
 <h4><code><a title="numba_mpi.mpi.Operator" href="#numba_mpi.mpi.Operator">Operator</a></code></h4>
 <ul class="">
-<li><code><a title="numba_mpi.mpi.Operator.Max" href="#numba_mpi.mpi.Operator.Max">Max</a></code></li>
-<li><code><a title="numba_mpi.mpi.Operator.Min" href="#numba_mpi.mpi.Operator.Min">Min</a></code></li>
-<li><code><a title="numba_mpi.mpi.Operator.Sum" href="#numba_mpi.mpi.Operator.Sum">Sum</a></code></li>
+<li><code><a title="numba_mpi.mpi.Operator.MAX" href="#numba_mpi.mpi.Operator.MAX">MAX</a></code></li>
+<li><code><a title="numba_mpi.mpi.Operator.MIN" href="#numba_mpi.mpi.Operator.MIN">MIN</a></code></li>
+<li><code><a title="numba_mpi.mpi.Operator.SUM" href="#numba_mpi.mpi.Operator.SUM">SUM</a></code></li>
 </ul>
 </li>
 </ul>
